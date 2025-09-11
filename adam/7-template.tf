@@ -2,11 +2,9 @@
 # https://developer.hashicorp.com/terraform/language/functions/file
 # Google Compute Engine: Regional Instance Template
 resource "google_compute_region_instance_template" "temp01" {
-  name         = "app01-template-terraform"
+  name         = var.temp01
   description  = "template for vm clone"
-  region       = google_compute_subnetwork.vpc01-sub01.region
-  # or write region argument statically as
-  # region = "" (optional if provider default is set)
+  region       = google_compute_subnetwork.subnet01.region
   machine_type = "e2-medium"
 
 
@@ -18,7 +16,7 @@ resource "google_compute_region_instance_template" "temp01" {
 
   # Network Configurations 
   network_interface {
-    subnetwork = google_compute_subnetwork.vpc01-sub01.id
+    subnetwork = google_compute_subnetwork.subnet01.id
     /*access_config {
       # Include this section to give the VM an external IP address
     } */
